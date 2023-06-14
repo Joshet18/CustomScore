@@ -37,7 +37,6 @@ class Loader extends PluginBase implements Listener{
 
   public function getScoreboards(): Config { return $this->scoreboards; }
 
-  
   public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool{
     if(strtolower($cmd->getName()) === "scoreboard"){
       if(!isset($args[0])){
