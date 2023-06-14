@@ -1,3 +1,5 @@
+[![](https://poggit.pmmp.io/shield.state/CustomScore)](https://poggit.pmmp.io/p/CustomScore)
+
 ## 📜 Tags:
 | Name                     | Description                                |
 |--------------------------|--------------------------------------------|
