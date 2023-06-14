@@ -8,7 +8,7 @@
 | {server.online.max}      | shows the maximum number of players        |
 | {server.tps.usage}       | show server tps                            |
 | {server.tps.percentage}  | shows the tps percentage of the server     |
-| {lunarranks.rank}        | get player rank using (LunarRanks)[https://poggit.pmmp.io/p/LunarRanks]|
+| {lunarranks.rank}        | get player rank using [LunarRanks](https://poggit.pmmp.io/p/LunarRanks)|
 |||
 ## 📋 Commands / Permissions:
 | Permission         | Command                |
@@ -16,8 +16,8 @@
 | customscore        | `/scoreboard`          |
 | customscore.reload | `/scoreboard reload`   |
 ## ⚒ API:
-  to add custom tags you can use `PlayerScoreTagEvent`,
-  Plugin:
+  to add custom tags you can use `PlayerScoreTagEvent`
+  Example:
   ```php
   public function onPlayerTags(PlayerScoreTagEvent $ev): void {
     $ev->setTags($this->processTags($ev->getPlayer(), $ev->getTags()));
