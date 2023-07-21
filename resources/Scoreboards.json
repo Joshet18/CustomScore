@@ -9,7 +9,6 @@
             "&bPing&7:&f {player.ping}",
             "&bOnline&7:&f {server.online}&7/&f{server.online.max}",
             "&bTPS&7:&f {server.tps.usage}&7 | &f{server.tps.percentage}%",
-            "&bRank&7:&f {lunarranks.rank}",
             "&5",
             "&7----------------&r"
         ]
@@ -24,7 +23,6 @@
             "&bPing&7:&f {player.ping}",
             "&bOnline&7:&f {server.online}&7&f{server.online.max}",
             "&bTPS&7:&f {server.tps.usage}&7 | &f{server.tps.percentage}%",
-            "&bRank&7:&f {lunarranks.rank}",
             "&5",
             "&7----------------&r"
         ]

@@ -8,11 +8,15 @@ use pocketmine\command\Command;
 use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
-use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\player\Player;
+use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\SingletonTrait;
 use pocketmine\utils\Config;
+
+use IvanCraft623\RankSystem\RankSystem;
+use IvanCraft623\RankSystem\utils\Utils;
+use lunarelly\ranks\LunarRanksPlugin;
 
 class Loader extends PluginBase implements Listener{
   use SingletonTrait;
@@ -45,7 +49,7 @@ class Loader extends PluginBase implements Listener{
       }
       switch($args[0]){
         case "reload":
-          if($sender->hasPermission("customscoreboard.reload") or $sender instanceof ConsoleCommandSender){
+          if($sender->hasPermission("customscore.reload") or $sender instanceof ConsoleCommandSender){
             $this->cf = new Config($this->getDataFolder()."Config.json", Config::JSON);
             $this->scoreboards = new Config($this->getDataFolder()."Scoreboards.json", Config::JSON);
             $sender->sendMessage("§d[§eCustom§6ScoreBoard§d] §7>§a Settings applied successfully");
@@ -81,26 +85,39 @@ class Loader extends PluginBase implements Listener{
 
   private function processDefaultTags(Player $player, array $tags):array{
     $result = [];
-    $rank = $this->getServer()->getPluginManager()->getPlugin("LunarRanks");
     foreach($tags as $tag){
       $result[] = str_replace([
         "{player.name}",
         "{player.ping}",
+        "{player.xp.level}",
+		    "{player.xp.progress}",
+	    	"{player.xp.remainder}",
+        "{player.xp.current_total}",
         "{time.date}",
         "{server.online}",
         "{server.online.max}",
         "{server.tps.usage}",
         "{server.tps.percentage}",
-        "{lunarranks.rank}"
+        "{lunarranks.rank}",
+        "{ranksystem.ranks}",
+        "{ranksystem.highest_rank}",
+        "{ranksystem.nametag}"
       ],[
         $player->getName(),
         $player->getNetworkSession()->getPing(),
+        $player->getXpManager()->getXpLevel(),
+        $player->getXpManager()->getXpProgress(),
+        $player->getXpManager()->getRemainderXp(),
+        $player->getXpManager()->getCurrentTotalXp(),
         date($this->getScoreboards()->get("date-format", "d-m-Y")),
         count($this->getServer()->getOnlinePlayers()),
         $this->getServer()->getMaxPlayers(),
         $this->getServer()->getTicksPerSecond(),
         $this->getServer()->getTickUsage(),
-        ($rank === null ? "Not found" : $rank->getRank($player)->getDisplayName())
+        (!class_exists(LunarRanksPlugin::class) ? "Not found" : LunarRanksPlugin::getInstance()->getRank($player)->getDisplayName()),
+        (!class_exists(RankSystem::class) ? "Not found" : Utils::ranks2string(RankSystem::getInstance()->getSessionManager()->get($player)->getRanks())),
+        (!class_exists(RankSystem::class) ? "Not found" : RankSystem::getInstance()->getSessionManager()->get($player)->getHighestRank()->getName()),
+        (!class_exists(RankSystem::class) ? "Not found" : RankSystem::getInstance()->getSessionManager()->get($player)->getNameTagFormat())
       ], $tag);
     }
     return $result;
