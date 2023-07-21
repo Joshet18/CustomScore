@@ -1,7 +1,7 @@
 name: CustomScore
 main: Joshet18\CustomScoreboard\Loader
 description: "a plugin that allows you to display and customize scoreboards to your liking"
-version: 1.0
+version: 1.0.0
 api: 5.0.0
 author: Joshet18
 src-namespace-prefix: Joshet18\CustomScoreboard
