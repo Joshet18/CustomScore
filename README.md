@@ -49,7 +49,7 @@
     $result = [];
     foreach($tags as $tag){
       $result[] = str_replace([
-        "{customtag.item.name}" 
+        "{customtag.item.name}"
       ],[
         $player->getInventory()->getItemInHand()->getVanillaName()
       ], $tag);
