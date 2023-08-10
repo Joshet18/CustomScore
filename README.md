@@ -20,6 +20,10 @@
 | {ranksystem.ranks}       | get player's ranks       | [RankSystem](https://poggit.pmmp.io/p/RankSystem)|
 | {ranksystem.highest_rank}| get the player's highest rank | [RankSystem](https://poggit.pmmp.io/p/RankSystem)|
 | {ranksystem.nametag}     | get player's nametag     | [RankSystem](https://poggit.pmmp.io/p/RankSystem)|
+| {bedrockeconomy.balance} | get player's balance     | [BedrockEconomy](https://poggit.pmmp.io/p/BedrockEconomy) |
+| {bedrockeconomy.balance.cap} | getbalance cap       | [BedrockEconomy](https://poggit.pmmp.io/p/BedrockEconomy) |
+| {bedrockeconomy.currency.symbol} | get economy symbol | [BedrockEconomy](https://poggit.pmmp.io/p/BedrockEconomy) |
+| {bedrockeconomy.currency.name} | get economy name   | [BedrockEconomy](https://poggit.pmmp.io/p/BedrockEconomy) |
 
 ## 📋 Commands / Permissions:
 | Permission         | Command                |
@@ -45,7 +49,7 @@
     $result = [];
     foreach($tags as $tag){
       $result[] = str_replace([
-        "{customtag.item.name}"
+        "{customtag.item.name}" 
       ],[
         $player->getInventory()->getItemInHand()->getVanillaName()
       ], $tag);
