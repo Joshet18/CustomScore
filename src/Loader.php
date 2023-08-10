@@ -168,7 +168,7 @@ class Loader extends PluginBase implements Listener{
 
 
   public function updatePlayerBalance(string|Player $player):void{
-    if(!$player instanceof Player)$this->getServer()->getPlayerExact($player);
+    if(!$player instanceof Player)$player = $this->getServer()->getPlayerExact($player);
     if(!$player?->isOnline())return;
     BedrockEconomyAPI::beta()->get($player->getName())->onCompletion(
       function (?int $balance) use ($player): void {

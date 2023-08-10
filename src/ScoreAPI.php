@@ -34,10 +34,7 @@ final class ScoreAPI {
 	}
 
 	public function newScore(Player $player, string $title) : void{
-		if(isset($this->scoreboards[$player->getName()])){
-			return;
-			self::removeScoreboard($player);
-		}
+		if(isset($this->scoreboards[$player->getName()]))return;
 		$pk = new SetDisplayObjectivePacket();
 		$pk->displaySlot = "sidebar";
 		$pk->objectiveName = "objective";
