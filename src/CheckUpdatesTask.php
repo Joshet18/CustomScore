@@ -21,17 +21,16 @@ class CheckUpdatesTask extends AsyncTask {
   }
   
   public function onCompletion(): void {
-    $logger = Server::getInstance()->getLogger(); 
     [$body, $error] = $this->getResult();
     if($error){
-      $logger->warning("Auto-update check failed."); 
-      $logger->debug($error); 
+      Loader::getInstance()->getLogger()->warning("Auto-update check failed."); 
+      Loader::getInstance()->getLogger()->debug($error); 
     }else{
-      $versions = json_decode($body, true);
-      if($versions)foreach($versions as $version){
+      $data = json_decode($body, true);
+      if($data)foreach($data as $version){
         if(version_compare($this->version, $version["version"]) === -1){
           if(ApiVersion::isCompatible(Server::getInstance()->getApiVersion(), $version["api"][0])){
-            $logger->notice($this->name." v" . $version["version"]." is available for download at ".$version["artifact_url"]."/".$this->name.".phar");
+            Loader::getInstance()->getLogger()->notice($this->name." v" . $version["version"]." is available for download at ".$version["artifact_url"]."/".$this->name.".phar");
             break; 
           } 
         } 
