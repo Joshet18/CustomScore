@@ -92,6 +92,7 @@ final class ScoreAPI {
 		$pk->type = $pk::TYPE_CHANGE;
 		$pk->entries[] = $entry;
 		$player->getNetworkSession()->sendDataPacket($pk);
+		return true;
 	}
 
 	public function setEmptyLine(Player $player, int $line) : void{
