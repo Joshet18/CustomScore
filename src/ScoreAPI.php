@@ -34,6 +34,9 @@ final class ScoreAPI {
 	}
 
 	public function newScore(Player $player, string $title) : void{
+		$ev = new NewScoreEvent($player);
+		$ev->call();
+		if ($ev->isCancelled()) return;
 		if(isset($this->scoreboards[$player->getName()]))return;
 		$pk = new SetDisplayObjectivePacket();
 		$pk->displaySlot = "sidebar";
@@ -69,14 +72,14 @@ final class ScoreAPI {
 		$player->getNetworkSession()->sendDataPacket($pk);
 	}
 
-	public function setLine(Player $player, int $score, string $line): void {
+	public function setLine(Player $player, int $score, string $line): bool {
 		if(!isset($this->scoreboards[$player->getName()])){
-			self::sendError("Cannot set a score to a player with no scoreboard");
-			return;
+			//self::sendError("Cannot set a score to a player with no scoreboard");
+			return false;
         }
     	if($score > 15 || $score < 1){
       		self::sendError("Score must be between the value of 1-15. {$score} out of range");
-      		return;
+      		return false;
     	}
 		$entry = new ScorePacketEntry();
 		$entry->objectiveName = "objective";
