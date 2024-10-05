@@ -74,7 +74,7 @@ final class ScoreAPI {
 
 	public function setLine(Player $player, int $score, string $line): bool {
 		if(!isset($this->scoreboards[$player->getName()])){
-			//self::sendError("Cannot set a score to a player with no scoreboard");
+			self::sendError("Cannot set a score to a player with no scoreboard");
 			return false;
         }
     	if($score > 15 || $score < 1){
@@ -101,6 +101,6 @@ final class ScoreAPI {
 	}
 	
   private function sendError(string $error): void {
-    Server::getInstance()->getLogger()->error($this->prefix." ".$error);
+    Server::getInstance()->getLogger()->debug($this->prefix." ".$error);
   }
 }

@@ -1,8 +1,17 @@
 {
-  "version": 1.1,
+  "version": 1.2,
   "multi-world": false,
   "date-format": "d-m-Y",
   "logger": false,
   "update-score": 2,
-  "update-player-balance-tag": 5
+  "update-player-balance-tag": 5,
+  "played-time:dateformat-letters": {
+    "color": "&e",
+    "year": "y",
+    "month": "mo",
+    "day": "d",
+    "hour": "h",
+    "minute": "m",
+    "second": "s"
+  }
 }
